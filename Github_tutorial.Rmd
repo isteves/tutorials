@@ -35,7 +35,8 @@ In order to interact with the original repository, you can *submit pull-requests
 
 
 
-
+#TODO
+*add info about how to use private email (and what to do if you already have some commits) https://stackoverflow.com/questions/3042437/change-commit-author-at-one-specific-commit note: spell amend correctly!
 
 
 
