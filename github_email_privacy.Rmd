@@ -3,7 +3,7 @@ title: "Github email privacy"
 output: html_notebook
 ---
 
-By default, your email is publicly associated with every commit you make. To keep your email private, you will have to navigate to your email settings (more detail on that [here](https://help.github.com/articles/setting-your-commit-email-address-on-github/).):
+By default, your email is publicly associated with every commit you make. To keep your email private, you will have to navigate to your email settings (more detail on that [here](https://help.github.com/articles/setting-your-commit-email-address-on-github/)):
 
 1. Click on your profile picture in the top right corner and click *Settings* from the drop-down bar
 2. Click *Emails* from the list of options on the left side-bar. 
