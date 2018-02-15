@@ -1,4 +1,4 @@
-Extracting EML metadata using R
+Extracting attribute metadata using R
 ================
 
 Each dataset in the [Arctic Data Center](https://arcticdata.io/) has associated metadata that displays on the data package page (for example, [here](doi.org/10.18739/A2X86K)), which can also be downloaded as an \*.xml file.
