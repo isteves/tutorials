@@ -1,12 +1,20 @@
 ---
-title: "Using Git with RStudio"
+title: "Git for R-Users"
 output:
-  github_document: default
+  github_document
 ---
 
-Many people and groups use Git and [GitHub](https://github.com/) as a way to rigorously document changes in code. The layers of checks and balances are what makes git great but also incredibly overwhelming for a beginner. Here's how I started using git via RStudio:
+I imagine many R-users started out the way I did: learning and using R for personal projects and problems. I almost never shared my code, since the people I interacted with probably couldn't read it anyway. I focused on the R outputs: pretty plots and reports. 
 
-## Layer 1: commit-pull-push
+Git and [GitHub](https://github.com/) are powerful tools that anyone writing code should use. It has great versioning capabilities, which means the history of your code--how it developed, how it broke, etc.--never gets lost.
+
+When working in teams, it gets more complicated. There are various checks and balances that you can implement to provide a more complex workflow of code-reviews, comments, and suggestions. 
+
+However, there's no need to dive off the deep end and struggle to stay afloat! Start by using Git with yourself and eventually move deeper into the Git layers as you go.
+
+Here's my progression of git-use (primarily via RStudio):
+
+## Layer 1: GitHub & me - using GitHub as a versioned Google Drive
 
 #### Starting glossary
 * repo = repository
@@ -17,9 +25,25 @@ Many people and groups use Git and [GitHub](https://github.com/) as a way to rig
 * pull = to pull in your online Github repo to your local git folder; keeps your work up-to-date
 
 #### Set-up
-To start out, it's easiest work with just yourself or with one other person.  All your communication, then, is just between your local repository and the repository on github.com.  
+To start out, it's easiest work with just yourself or with one other person.  All your communication, then, is just between your local repository and the repository on github.com. 
 
-[set-up process]
+Start by [creating a new repository on Github](https://help.github.com/articles/create-a-repo/) (of course, create an account first if you don't have one!). On the [GitHub home page](github.com), scroll down a bit and then click the bright green `New repository` button on the right.
+
+![](tutorials-pics/github-new-repo.png){width=500px}
+
+That will bring you to a page to create your new repository!  Just add in the details and click "Create repository." Check the box for "initialize this repository with a README."
+
+![](tutorials-pics/create-new-repo.png){width=500px}
+
+Now that you have a new repository, you can link it to your local computer using our beloved RStudio! Just go to `File` --> `New Project`. Then click `Version Control` --> `Git` --> [write in repository URL] --> `Create Project`.
+
+![](tutorials-pics/new-project.png){width=300px}
+
+![](tutorials-pics/version-control.png){width=300px}
+
+![](tutorials-pics/repo-url.png){width=300px}
+
+From now on, any time you work within your project, you just need to remember: *commit-pull-push*. Thankfully, they're displayed in that order within RStudio. ![](tutorials-pics/commit-pull-push.png){width=200px} :ring: :couple: :baby:
 
 Now when you work in your git-tracked project in RStudio, you have the option of interacting with git in the git panel on the top right.  To commit, or save, a change, check the *Staged* box on the left side of the file(s) you want to commit, and then click the "Commit" button at the top. A window will pop up for you to write your commit message (i.e. "fixed typo" or "wrote a function for summing three numbers").  Once you submitted, you've committed these changes to your files locally, and you're almost ready to move them to the internet!
 
