@@ -1,0 +1,19 @@
+---
+title: "Getting attribute metadata from shapefiles"
+output: github_document
+---
+
+Metadata in spatial data can be easily extracted in a few steps. 
+
+```{r eval = FALSE}
+library(rgdal)
+root_folder_path <- "dir1/dir2/"
+folder_name <- "folder_name" #name of folder containing shapefiles and associated data
+spatial_obj <- readOGR(dsn = paste0(folder_path, folder_name),
+              layer = folder_name)
+spatial_df <- spatial_obj@data #save data as a dataframe
+spatial_obj@proj4string #get coordinate unit information
+```
+
+
+##
