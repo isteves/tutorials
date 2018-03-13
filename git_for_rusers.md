@@ -1,0 +1,64 @@
+Git for R-Users
+================
+
+I imagine many R-users started out the way I did: learning and using R for personal projects and problems. I almost never shared my code, since the people I interacted with probably couldn't read it anyway. I focused on the R outputs: pretty plots and reports.
+
+Git and [GitHub](https://github.com/) are powerful tools that anyone writing code should use. It has great versioning capabilities, which means the history of your code--how it developed, how it broke, etc.--never gets lost.
+
+When working in teams, it gets more complicated. There are various checks and balances that you can implement to provide a more complex workflow of code-reviews, comments, and suggestions.
+
+However, there's no need to dive off the deep end and struggle to stay afloat! Start by using Git with yourself and eventually move deeper into the Git layers as you go.
+
+Here's my progression of git-use (primarily via RStudio):
+
+Layer 1: GitHub & me - using GitHub as a versioned Google Drive
+---------------------------------------------------------------
+
+#### Starting glossary
+
+-   repo = repository
+-   git = versioning system that you can interact with through the command line or RStudio
+-   GitHub = online versioning website based on git
+-   commit = to save your changes to the version record
+-   push = to push your changes (commits) to your online Github account
+-   pull = to pull in your online Github repo to your local git folder; keeps your work up-to-date
+
+#### Set-up
+
+To start out, it's easiest work with just yourself or with one other person. All your communication, then, is just between your local repository and the repository on github.com.
+
+Start by [creating a new repository on Github](https://help.github.com/articles/create-a-repo/) (of course, create an account first if you don't have one!). On the [GitHub home page](github.com), scroll down a bit and then click the bright green `New repository` button on the right.
+
+<img src="tutorials-pics/github-new-repo.png" width="500" />
+
+That will bring you to a page to create your new repository! Just add in the details and click "Create repository." Check the box for "initialize this repository with a README."
+
+<img src="tutorials-pics/create-new-repo.png" width="500" />
+
+Now that you have a new repository, you can link it to your local computer using our beloved RStudio! Just go to `File` --&gt; `New Project`. Then click `Version Control` --&gt; `Git` --&gt; \[write in repository URL\] --&gt; `Create Project`.
+
+<img src="tutorials-pics/new-project.png" width="300" />
+
+<img src="tutorials-pics/version-control.png" width="300" />
+
+<img src="tutorials-pics/repo-url.png" width="300" />
+
+From now on, any time you work within your project, you just need to remember: *commit-pull-push*. Thankfully, they're displayed in that order within RStudio. <img src="tutorials-pics/commit-pull-push.png" width="200" /> :ring: :couple: :baby:
+
+Now when you work in your git-tracked project in RStudio, you have the option of interacting with git in the git panel on the top right. To commit, or save, a change, check the *Staged* box on the left side of the file(s) you want to commit, and then click the "Commit" button at the top. A window will pop up for you to write your commit message (i.e. "fixed typo" or "wrote a function for summing three numbers"). Once you submitted, you've committed these changes to your files locally, and you're almost ready to move them to the internet!
+
+But before you *push* the files, you want to *pull* (down arrow) your github repository. This helps you make sure that your updates will be applied to the most current version of your github repository. If you're all up to date (more on if you're not later), then just push your commits straight through to github! When you check your repository, you should see your commit displayed across the top of your repository.
+
+And that it's it! Just use *commit-pull-push* (or just pull all the time like I do to make sure you're always up to date), and you'll have a clean, clear record of the changes you've made to your code over time.
+
+Layer 2: working with forks
+---------------------------
+
+If you're working on a slightly bigger project, you may want to add an additional layer of protection against unwanted changes. By *forking* a repository, you create your own version of the repository that you can interact with as in the previous section.
+
+In order to interact with the original repository, you can *submit pull-requests* to add your new changes. If other changes have been made to the original repository since you last interacted with it, you may have to *merge* your changes into the newest version or *rebase* your repository before adding in your new commits.
+
+TODO
+====
+
+\*add info about how to use private email (and what to do if you already have some commits) <https://stackoverflow.com/questions/3042437/change-commit-author-at-one-specific-commit> note: spell amend correctly!
