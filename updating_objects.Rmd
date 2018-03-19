@@ -1,0 +1,47 @@
+## Updating objects
+
+You'll sometimes have to update data objects in a package, usually for one of two reasons:
+
+1. The PI gives you a new version of the data file
+2. You make changes to tidy up the data in accordance to [best practices](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/0012-9623-90.2.205)
+
+We want to archive data both in its raw form (straight from the PI) and in its improved form (edits by us), using provenance to link the two. 
+
+Thus, in the case of (1), use `update_package_object` to update the data object with a new file, update the resource map, and update the EML (if it already has an associated data table/other entity). 
+
+```{r eval = FALSE}
+update_package_object(mnTest, 
+                      data_pid = ORIGINAL_DATA_PID, 
+                      new_data_path= NEW_DATA_PATH, 
+                      resource_map_pid = RESOURCE_MAP_PID,
+                      format_id = FORMAT_ID)
+```
+
+If YOU update a data object (to fix headers, etc.), then use `publish_object` followed by `publish_update` to keep the original and new data objects in the data package.
+
+```{r eval = FALSE}
+pkg <- get_package(mnTest, METADATA_PID)
+
+new_pid <- publish_object(mnTest,
+               path = NEW_DATA_PATH,
+               format_id = FORMAT_ID,
+               public = FALSE)
+
+publish_update(mnTest,
+               metadata_pid = pkg$metadata,
+               resource_map_pid = pkg$resource_map,
+               data_pids = c(pkg$data, new_pid), #add new pid
+               child_pids = pkg$child,
+               public = FALSE)
+```
+
+If you then need to make further updates to YOUR data object, then go ahead and use `update_package_object`:
+
+```{r eval = FALSE}
+update_package_object(mnTest, 
+                      data_pid = YOUR_ORIGINAL_DATA_PID, 
+                      new_data_path= NEW_DATA_PATH, 
+                      resource_map_pid = RESOURCE_MAP_PID,
+                      format_id = FORMAT_ID)
+```
+
