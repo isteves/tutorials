@@ -20,7 +20,7 @@ update_package_object(mnTest,
 If YOU update a data object (to fix headers, etc.), then use `publish_object` followed by `publish_update` to keep the original and new data objects in the data package.
 
 ```{r eval = FALSE}
-pkg <- get_package(mnTest, METADATA_PID)
+pkg <- get_package(mnTest, RESOURCE_MAP_PID)
 
 new_pid <- publish_object(mnTest,
                path = NEW_DATA_PATH,
