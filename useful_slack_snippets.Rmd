@@ -1,0 +1,69 @@
+---
+title: "Irene's collection of useful snippets from Slack"
+output: github_document
+---
+
+## NetCDF's
+
+How to read in NetCDF's to R.
+
+From [Sharis](https://github.com/sharisochs):
+
+```{r eval = FALSE}
+t <- nc_open('~/local_erddap/dataset/ct/Commercial_Harvest_by_District/distinct.nc')
+test <- ncvar_get(t, 'WholeLbs')
+```
+
+## Git
+How to update a master branch and then merge updates into a fork.
+
+From [Dominic](https://github.com/dmullen17):
+
+```
+git checkout master (switch to your master branch)
+git pull upstream master (pull all commits from NCEAS/datamgmt that you don't have)
+git push origin master (push your updated local version of master to your fork on github)
+git checkout isteves-get_awards (switch to this branch) 
+git merge master (merge all commits from master into your branch)
+git push origin isteves-get_awards (push your branch to a branch on your fork on github
+```
+
+## Member nodes
+Accessing KNB test/development node.
+
+From [Bryce](https://github.com/amoeba):
+
+```
+# knb dev
+mn <- MNode("https://dev.nceas.ucsb.edu/knb/d1/mn/v2")
+```
+
+## Kill sessions
+How to kill sessions via the command line.
+
+From [Dominic](https://github.com/dmullen17):
+
+```
+killall -u username rsession
+```
+
+## tmux
+How to use tmux to run processes in parallel.
+
+From [Dominic](https://github.com/dmullen17):
+
+```
+Multiple sessions:  
+1. Open terminal 
+2. "ssh username@datateam.nceas.ucsb.edu" 
+3. Use tmux to open multiple sessions 
+    1. "tmux new -s session_name" 
+4. "R" will open an instance of R 
+5. Load libraries and dependencies - i like to put everything I need in a file I can source ("source("/home/dmullen/terminal_deps.R")
+6. Run whatever code you need to run 
+7. Close the window (everything running keeps going).  "ctrl+b, followed by d"
+    1. "ctrl+b" has a bunch of different follow up options when using tmux 
+8. "tmux a -t session_name"  - re-open a running session 
+9. "tmux ls" list your running sessions 
+10. "tmux kill-session -t session_name" - close a session 
+```

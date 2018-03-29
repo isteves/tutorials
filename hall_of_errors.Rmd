@@ -1,0 +1,29 @@
+---
+title: "Hall of Errors"
+output: github_document
+---
+
+This is where I'm collecting the various confusing error messages I encounter, and how I ultimately resolve them!
+
+## R
+
+## Git/GitHub
+
+**Error:** `git pull upstream master` fails. This command is used to update the master branch of your fork with whatever is on the master branch of the original repository
+
+```
+fatal: 'upstream' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+**Solution:** Use `git remote add upstream URL` so that git knows what your upstream is. For some reason, this error occurs inconsistently on forked repos
+
+```
+git remote add upstream https://github.com/NCEAS/datateam-training
+git pull upstream master
+```
+
+## Travis
