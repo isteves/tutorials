@@ -1,6 +1,8 @@
 ---
 title: "Irene's collection of useful snippets from Slack"
-output: github_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## NetCDF's

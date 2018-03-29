@@ -1,7 +1,8 @@
 ---
 title: "Git for R-Users"
 output:
-  github_document
+  html_document:
+    df_print: paged
 ---
 
 I imagine many R-users started out the way I did: learning and using R for personal projects and problems. I almost never shared my code, since the people I interacted with probably couldn't read it anyway. I focused on the R outputs: pretty plots and reports. 
