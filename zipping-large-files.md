@@ -1,5 +1,6 @@
+
 Zipping files on the server
-================
+===========================
 
 While it's possible to zip files in R, it may be faster and more efficient to zip files directly in the terminal. Here's how it's done:
 
