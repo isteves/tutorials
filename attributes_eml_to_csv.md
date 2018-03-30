@@ -1,20 +1,17 @@
----
-title: "Extracting attribute metadata using R"
-output:
-  github_document
----
+Extracting attribute metadata using R
+================
 
-Each dataset in the [Arctic Data Center](https://arcticdata.io/) has associated metadata that displays on the data package page (for example, [here](doi.org/10.18739/A2X86K)), which can also be downloaded as an *.xml file. 
+Each dataset in the [Arctic Data Center](https://arcticdata.io/) has associated metadata that displays on the data package page (for example, [here](doi.org/10.18739/A2X86K)), which can also be downloaded as an \*.xml file.
 
-You can scroll through attribute (variable) metadata in the *Attribute Information* section of a Data Table or Other Entity, but sometimes it's easier to have examine this information using tabular data. 
+You can scroll through attribute (variable) metadata in the *Attribute Information* section of a Data Table or Other Entity, but sometimes it's easier to have examine this information using tabular data.
 
-![](tutorials-pics/attribute-info.png){width=500px}
+<img src="tutorials-pics/attribute-info.png" width="500" />
 
 Thankfully, this is easily done using the `EML` package in R!
 
 Start by downloading the EML file to a local directory. Alternatively, use `RCurl` to download the file from my github directory and follow along. Use `read_eml()` to load it into your R environment.
 
-```{r echo = TRUE, warning = FALSE, message = FALSE}
+``` r
 library(RCurl)
 library(EML)
 
@@ -24,33 +21,40 @@ eml <- read_eml(eml_web)
 #(i.e., "home/isteves/my_metadata.xml")
 ```
 
-We usually only have attributes for data tables, which we can grab from our EML using `eml_get`. 
+We usually only have attributes for data tables, which we can grab from our EML using `eml_get`.
 
-```{r}
+``` r
 attributes <- eml_get(eml, "attributeList")
 ```
 
 The variable, `attributes`, now has all the attribute information in the package stored as a list. For this example, we have three attribute objects.
 
-```{r}
+``` r
 class(attributes)
+```
+
+    ## [1] "list"
+
+``` r
 length(attributes)
 ```
 
+    ## [1] 3
+
 Each list object contains another list of 2 objects: (1) *attribute* information in the form of a dataframe and (2) *factors* to store information about enumerated domains within the dataset. A column titled "Fruit", for example, may include data (`c("o", "g", "p", "o")`) as factors (o = orange, g = grape, p = pineapple).
 
-![](tutorials-pics/attribute-list-object.png){width=500px}
+<img src="tutorials-pics/attribute-list-object.png" width="500" />
 
 To extract a single dataframe and save it to a csv, simply run:
 
-```{r eval = FALSE}
+``` r
 attribute1 <- attributes[[1]]$attributes
 write.csv(attribute1, "attribute1.csv")
 ```
 
 To save all attributes, a for loop makes it easy:
 
-```{r eval = FALSE}
+``` r
 for(i in 1:length(attributes)){
   attribute1 <- attributes[[i]]$attributes
   file_name <- paste0("attribute", i, ".csv")

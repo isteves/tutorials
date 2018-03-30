@@ -1,6 +1,8 @@
 
-Intro to Python and the Command Line for an R User
-==================================================
+Intro to Python and the Command Line
+====================================
+
+### *for an R User*
 
 Some things are just faster on the command line. But if you're not used to it, the command line is a dark and scary place. Thankfully, I had [amoeba](https://github.com/amoeba) to help me through:
 
