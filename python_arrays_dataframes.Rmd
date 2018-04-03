@@ -1,6 +1,7 @@
 ---
 title: "Foray into data frames and arrays in Python"
-output: github_document
+output:
+  github_document
 ---
 
 Since I'm still more or less mono-lingual in R (as far as coding languages go anyhow), trying to understand how arrays and data frames worked in Python :snake: was a bit of a head scratcher. 
