@@ -69,3 +69,47 @@ Multiple sessions:
 9. "tmux ls" list your running sessions 
 10. "tmux kill-session -t session_name" - close a session 
 ```
+
+## Get nested packages with recursive functions
+
+From [Mitchell](https://github.com/maier-m):
+
+```
+cn <- dataone::CNode('PROD')
+mn <- dataone::getMNode(cn,'urn:node:ARCTIC')
+rm_pid <- " resourceMap_arctic-data.14753.2"
+
+
+getStructure <- function(mn, rm_pid) {
+
+print(rm_pid)
+    
+# Initialize Structure
+root <- data.tree::Node$new(rm_pid)
+
+# Query
+pid_esc <- stringi::stri_replace_all_fixed(rm_pid, ":", "\\:")
+query_params <- list(q = paste0("resourceMap:", pid_esc),
+                     rows = 1000,
+                     fl = "identifier,formatType")
+response <- dataone::query(mn, query_params, as = "list")
+
+for (x in response) {
+    
+    if (x$formatType == "RESOURCE") {
+        node <- getStructure(mn, x$identifier)
+        root$AddChildNode(node)
+    }
+    
+}
+
+return(root)
+
+}
+
+out <- getStructure(mn, rm_pid)
+
+
+tree_list <- data.tree::ToListExplicit(out, unname = TRUE)
+networkD3::diagonalNetwork(tree_list)
+```

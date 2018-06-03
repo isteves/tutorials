@@ -7,6 +7,10 @@ This is where I'm collecting the various confusing error messages I encounter, a
 
 ## R
 
+**Error:** When running `devtools::check()` and this error shows up: "Running the tests in ‘tests/test_xxx.R’ failed...could not find function"
+
+**Solution:** The test file is in the wrong place! It needs to be in 'test/testthat/test_xxx.R'.
+
 ## Git/GitHub
 
 **Error:** `git pull upstream master` fails. This command is used to update the master branch of your fork with whatever is on the master branch of the original repository

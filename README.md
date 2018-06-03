@@ -7,3 +7,4 @@ Here are some topics covered so far (others in progress):
 - [Fo(u)ray into data frames and arrays in Python](https://isteves.github.io/tutorials/python_arrays_dataframes) - 4 lessons I learned while trying to use Python arrays/data frames
 - [GitHub email privacy](https://isteves.github.io/tutorials/github_email_privacy) - what I learned when I tried to use remove my personal email from GitHub
 - [Extracting attribute metadata using R](https://isteves.github.io/tutorials/attributes_eml_to_csv) - a tutorial for getting a csv of attribute information from the Arctic Data Center/EML in general; may have now been obsoleted by a function
+- [Plotting network data](https://isteves.github.io/tutorials/plot_networks.html) - in which I try out different network plotting methods to visualizing package nesting structure on the Arctic Data Center

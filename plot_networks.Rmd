@@ -1,0 +1,95 @@
+---
+title: "Plotting network data"
+output:
+  html_document
+---
+
+I used Jesse Sadler's [amazingly comprehensive tutorial on plotting networks](https://www.jessesadler.com/post/network-analysis-with-r/) as a jumping board for all these plots.  
+
+## Load packages
+
+```{r message = FALSE}
+library(dataone)
+library(tidyverse)
+library(network)
+library(igraph)
+library(tidygraph)
+library(ggraph)
+library(visNetwork)
+library(networkD3)
+library(data.tree)
+```
+
+## Get & organize data
+
+I want to examine the nesting relationships of data packages on the [Arctic Data Center](https://arcticdata.io). In this case, I'm grabbing all packages with "Beard" as an author.
+
+```{r}
+cn <- dataone::CNode('PROD')
+mn <- dataone::getMNode(cn,'urn:node:ARCTIC')
+
+result <- dataone::query(mn, list(q = 'author:*Beard*',
+                                  fl = '*',
+                                  sort = 'dateUploaded+desc',
+                                  rows='10000'),
+                         as = "data.frame")
+```
+
+From the query results, I now extract the resource map information and transform the data to an "edge" structure. I want a `from` and a `to` column that describes the relationships between resource maps.
+
+```{r}
+get_query_edges <- function(result) {
+  # resource maps (from) and their children (to)
+  
+  result %>% 
+    as_tibble() %>% 
+    filter(is.na(obsoletedBy)) %>% #remove any obsoleted resource maps from the mix
+    select(resourceMap, documents) %>% 
+    mutate(documents = str_split(documents, " ")) %>% #alternative to spread + gather
+    unnest(documents) %>%
+    filter(str_detect(documents, "resource")) %>% #grab only resource maps (ignores data and metadata objects)
+    rename(from = resourceMap,
+           to = documents) %>% 
+    mutate_all(funs(str_replace(., "resource_map_", ""))) #remove "resource_map_" to reduce identifier lengths when plotting
+}
+
+edges <- get_query_edges(result)
+```
+
+## Plot data
+
+```{r message = FALSE}
+rm_network <- network::network(edges, matrix.type = "edgelist", ignore.eval = FALSE)
+plot(rm_network, vertex.cex = 3)
+
+rm_igraph <- igraph::graph_from_data_frame(d = edges, directed = TRUE)
+plot(rm_igraph, edge.arrow.size = 0.2)
+```
+
+```{r}
+rm_igraph_tidy <- tidygraph::as_tbl_graph(rm_igraph)
+ggraph::ggraph(rm_igraph_tidy, layout = 'dendrogram', circular = TRUE) + 
+  geom_edge_diagonal() + 
+  geom_node_point() + 
+  coord_fixed() +
+  theme_graph()
+
+ggraph::ggraph(rm_igraph_tidy, layout = "tree") +
+  geom_edge_link() +
+  geom_node_point() +
+  # geom_node_text(aes(label = name), repel = TRUE) +
+  theme_graph()
+```
+
+```{r}
+#probably my favorite...
+visNetwork::visIgraph(rm_igraph, 
+          layout = "layout_as_tree",
+          flip.y = FALSE)
+
+networkD3::simpleNetwork(edges)
+
+tree <- data.tree::FromDataFrameNetwork(as.data.frame(edges))
+tree_list <- data.tree::ToListExplicit(tree, unname = TRUE)
+networkD3::diagonalNetwork(tree_list)
+```
